@@ -48,3 +48,9 @@ rhc
 rhc-worker-playbook
 rhel-system-roles-sap
 sap-cluster-connector
+
+# Newer do not ship ...
+filesystem    # 2020-04-30, rhbz#1827087
+freetype      # 2020-11-18, rhbz#1891906
+liblouis      # 2020-09-28, rhbz#1588626
+mingw-openssl # 2020-10-29, rhbz#1846152
