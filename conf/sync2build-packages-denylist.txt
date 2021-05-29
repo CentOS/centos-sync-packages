@@ -11,8 +11,7 @@ subscription-manager
 thunderbird
 
 # SCL
-gcc-toolset-9*
-gcc-toolset-10*
+gcc-toolset-*
 
 # Secureboot
 fwupd
