@@ -12,6 +12,8 @@ def log2stats(logname):
     ret = {'date' : None, 'pkgs' : {}, 'mods' : {'' : {}}}
     fn = os.path.basename(logname)
     ret['date'] = fn[:-len(".out.log")].replace("T", " ").replace("+0000", "Z")
+    if ret['date'].startswith("sync2git-"):
+        ret['date'] = ret['date'][len("sync2git-"):]
 
     state = 'beg'
     for line in open(logname):
@@ -82,10 +84,10 @@ def stats_subset(superset, subset):
     subset['mods'] = nmods
     return subset
 
-def process(logs):
+def process(logs, nlogs):
     ret = []
     first = None
-    for log in reversed(sorted(logs)):
+    for log in list(reversed(sorted(nlogs))) + list(reversed(sorted(logs))):
         if not log.endswith(".out.log"):
             continue
         stats = log2stats(log)
@@ -309,8 +311,9 @@ def main():
     if len(args) < 2:
         _usage()
 
-    logs = sorted(glob.glob(args[1] + '/*.log'))
-    stats = process(logs)
+    logs = sorted(glob.glob(args[1] + '/2*.log'))
+    nlogs = sorted(glob.glob(args[1] + '/sync2git-2*.log'))
+    stats = process(logs, nlogs)
 
     if False: pass
     elif args[0] in ('text', 'txt'):
