@@ -24,6 +24,7 @@ md5="$(md5sum laptop-sync.sh)"
 
     echo Doing HTML sync.
     uitime
+    ssh composer01.rdu2.centos.org rm -f centos-sync-packages/CVE-checker.html
     ssh composer01.rdu2.centos.org ./centos-sync-packages/cron-html.sh
     ./latest-RHEL-8.x/sync-file.sh x
 
