@@ -2,7 +2,7 @@
 
 burl="http://download.eng.bos.redhat.com/rhel-8/nightly/RHEL-8/latest-RHEL-8.5/"
 
-curl="curl --progress-bar --compressed --remote-time --location -O"
+curl="curl --compressed --remote-time --location -O"
 rsync="rsync --partial --info=progress2 -a -AX --del -e ssh"
 
 cd latest-RHEL-8.x

@@ -1,10 +1,11 @@
 #! /bin/sh -e
 
+PATH=$HOME/bin:$PATH
 # Find the dir. this script is in...
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 cd $DIR
 
-lockf=sync2git-lock-file.lock
+lockf=dashboard-lock-file.lock
 function unlockf {
     rm -f "$lockf"
 }
@@ -35,8 +36,8 @@ if [ ! -d logs ]; then
     mkdir logs
 fi
 
-fname="logs/sync2build-$(date --iso=minutes)"
+fname="logs/dashboard-$(date --iso=minutes)"
 
-python2 ./sync2build.py \
-  packages > "$fname.out.log" 2> "$fname.err.log"
+./dashboard-sync.sh \
+  > "$fname.out.log" 2> "$fname.err.log"
 

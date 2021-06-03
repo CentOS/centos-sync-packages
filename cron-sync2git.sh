@@ -56,7 +56,7 @@ if [ ! -d logs ]; then
     mkdir logs
 fi
 
-fname="logs/$(date --iso=minutes)"
+fname="logs/sync2git-$(date --iso=minutes)"
 
 python3 ./sync2git.py \
   $downloadonly \
