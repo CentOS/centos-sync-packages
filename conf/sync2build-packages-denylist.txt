@@ -19,7 +19,7 @@ fwupdate
 grub2
 kernel
 kernel-rt
-kmod*
+kmod-*
 shim
 shim-unsigned-aarch64
 shim-unsigned-x64
