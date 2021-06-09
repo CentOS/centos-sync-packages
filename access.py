@@ -361,14 +361,17 @@ def main():
             print(log4id(arg))
             print("-" * 78)
         sys.exit(0)
-    elif sys.argv[1] in ('hist', 'history'):
+    elif sys.argv[1] in ('hist', 'history', 'hist-n', 'history-n'):
         for arg in sys.argv[2:]:
             n, v, r = '', None, None
-            if '-' in arg:
-                n, v = arg.rsplit('-', 1)
+            if sys.argv[1].endswith("-n"):
+              n = arg
             else:
+              if '-' in arg:
+                n, v = arg.rsplit('-', 1)
+              else:
                 n = arg
-            if '-' in n:
+              if '-' in n:
                 r = v
                 n, v = n.rsplit('-', 1)
             print("=" * 78)
