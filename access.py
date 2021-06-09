@@ -18,7 +18,7 @@ use_multithreading = False
 
 sleep_beg = 0.1
 sleep_end = 8
-sleep_err = 120 # Kernel can take a _long_ time, like almost 2 hours.
+sleep_err = 600 # Kernel can take a _long_ time, like almost 2 hours.
                 # But most packages take a couple of seconds, and some queries
                 # just timeout all the time. When we rerun we'll see the history
                 # and pass it.
