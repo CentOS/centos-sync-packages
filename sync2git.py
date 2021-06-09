@@ -10,6 +10,7 @@ import sys
 import os
 import shutil
 import tempfile
+import random
 from optparse import OptionParser
 
 import spkg
@@ -477,7 +478,9 @@ def check_cve_builds(pkgs):
         #  Precache for speed, downside is it means once we get an allow
         # we stop querying.
         #  2021-05-05: Remove history calls because it's failing in weird ways.
-        if True: # not req.hist_precache():
+        #  2021-06-08: Probability so we do them to deal with timeouts/caching
+        #              but don't have weird problems.
+        if random.randint(1, 4) > 1 or not req.hist_precache():
             req.req()
 
     # Now we look at the results and filter those that aren't allowed...
