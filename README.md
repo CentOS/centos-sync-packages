@@ -15,7 +15,9 @@ Default setup is to sync from internal Red Hat EL8 nightly composes to
 [CentOS Stream 8](https://git.centos.org/rpms/centos-release-stream/).
 
 Usage:
-    `sync-cron.sh`
+    `cron-sync2git.sh`
+    `cron-sync2build.sh`
+    `cron-dashboard.sh`
 
 Other commands:
  * ./sync2git.py - Take packages from koji tag/compose and sync them to git.
@@ -43,9 +45,21 @@ Other commands:
  * * ./access.py -t &lt;duration> = set the query timeout
  * * ./access.py logs &lt;query-id> = Show the log data for the query id
  * * ./access.py history name[-version[-release]] = Show the history of the n/nvr
+ * * ./access.py history-n name = Show the history of the name
  * * ./access.py nvrs nvr... = Query the given NVRs
  * * ./access.py names name... = Query the given NVRs for local pkgs. named
  * * ./access.py names name... = Query the given NVRs for local pkgs. named
  * * ./access.py file-nvrs nvr... = Query all the nvrs in the files
  * ./rpmvercmp.py = rpm version comparison in python
  * * ./rpmvercmp.py &lt;s1> &lt;s2> = compare s1 vs. s2 using rpmvercmp logic
+ * ./mtimecache.py = caching of data based on mtime
+ * * ./mtimecache.py dur  &lt;secs> = convert seconds into human time
+ * * ./mtimecache.py durs &lt;secs> = convert seconds into human time
+ * * ./mtimecache.py secs &lt;time> = convert human time into seconds
+ * * ./mtimecache.py time &lt;secs> = convert seconds into digitial clock
+.py = rpm version comparison in python
+
+Finding modules to force push:
+
+ * fgrep 'Filtered Mod' logs/sync2git-$(date --iso=date)*
+
