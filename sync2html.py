@@ -1,4 +1,4 @@
-#! /usr/bin/python3
+#! /usr/bin/python2
 
 """Sync packages from a dist-git repository to a koji build system.
 Eg. Build packages which are newer in git than in the tag/compose we are
@@ -89,6 +89,7 @@ def koji_pkgs2archsigs(kapi, pkgs):
     return ret
 
 def _task_state(info):
+    if info is None: return 'None'
     return koji.TASK_STATES[info['state']]
 
 def _pkg_koji_task_state(self):
@@ -467,7 +468,7 @@ def html_main(kapi, fo, cpkgs,cbpkgs, bpkgs,
             weburl += "buildinfo?buildID=%d"
             weburl %= bpkg._koji_build_id
             links = {cpkg : weburl}
-            if cpkg == bpkg:
+            if cpkg.verEQ(bpkg):
                 if not filter_signed and not bpkg.signed:
                     _html_row("built not signed", lc="sign",
                               links=links)
@@ -476,12 +477,12 @@ def html_main(kapi, fo, cpkgs,cbpkgs, bpkgs,
                     _html_row("built and signed", lc="done", links=links)
                     stats['done'] += 1
                 continue
-            if cpkg < bpkg:
+            if cpkg.verLT(bpkg):
                 _html_row("OLDER than build: " + str(bpkg), lc="oldtag",
                           links=links)
                 stats['oldtag'] += 1
                 continue
-            if cpkg > bpkg:
+            if cpkg.verGT(bpkg):
                 if denied:
                     sbpkg = " " + str(bpkg)
                     _html_row("autobuild denied:"+ sbpkg, lc="denied")
@@ -501,19 +502,19 @@ def html_main(kapi, fo, cpkgs,cbpkgs, bpkgs,
                 continue
             found = True
             # This is the newest version in git...
-            if cpkg < tpkg:
+            if cpkg.verLT(tpkg):
                 _html_row("OLDER than git: " + str(tpkg), lc="older")
                 stats['older'] += 1
                 continue # See if the next oldest is ==
-            if cpkg == tpkg:
-                if cpkg == bpkg:
+            if cpkg.verEQ(tpkg):
+                if cpkg.verEQ(bpkg):
                     _html_row("No BUILD", lc="nobuild")
                     stats['nobuild'] += 1
                 else:
                     _html_row("BUILD needed, latest build: " + str(bpkg), lc="need_build")
                     stats['need_build'] += 1
                 break
-            if cpkg > tpkg:
+            if cpkg.verGT(tpkg):
                 _html_row("PUSH needed, latest git: " + str(tpkg), lc="push")
                 stats['push'] += 1
                 break
