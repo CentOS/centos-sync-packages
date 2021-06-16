@@ -4,7 +4,7 @@
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 cd $DIR
 
-lockf=sync2git-lock-file.lock
+lockf=sync2build-lock-file.lock
 function unlockf {
     rm -f "$lockf"
 }
