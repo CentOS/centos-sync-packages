@@ -809,8 +809,13 @@ def main():
                 print(" ** Package format is traditional (N-V-R)")
                 sys.exit(1)
             bpkgs.append(bpkg)
+
+        track = set()
+        for bpkg in bpkgs:
+            track.add(bpkg.name)
+
         bpkgs = check_denylist_builds(bpkgs, denylist)
-        bpkgs = check_unsynced_builds(bpkgs, packages_to_track)
+        bpkgs = check_unsynced_builds(bpkgs, track)
         # Don't do CVE check here...
         sync_directly(bpkgs)
     elif args[0] in ('push',):
