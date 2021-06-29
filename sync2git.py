@@ -766,7 +766,7 @@ def main():
         print(" ** Warning: This will run alt-src to push packages/modules.")
 
     if not args: pass
-    elif args[0] in ('force-push-module',):
+    elif args[0] in ('force-push-module', 'force-push-modules'):
         import compose
         builds = []
         for arg in args[1:]:
@@ -799,6 +799,20 @@ def main():
         sync_directly(extra_pkgs)
         sync_directly(extra_pkg2)
 
+    elif args[0] in ('force-push-package',  'force-push-pkg',
+                     'force-push-packages', 'force-push-pkgs'):
+        bpkgs = []
+        for arg in args[1:]:
+            try:
+                bpkg = nvr2pkg(arg)
+            except:
+                print(" ** Package format is traditional (N-V-R)")
+                sys.exit(1)
+            bpkgs.append(bpkg)
+        bpkgs = check_denylist_builds(bpkgs, denylist)
+        bpkgs = check_unsynced_builds(bpkgs, packages_to_track)
+        # Don't do CVE check here...
+        sync_directly(bpkgs)
     elif args[0] in ('push',):
         if options.sync_packages:
             tag  = options.packages_tag

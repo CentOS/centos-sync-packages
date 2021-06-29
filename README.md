@@ -22,7 +22,10 @@ Usage:
 Other commands:
  * ./sync2git.py - Take packages from koji tag/compose and sync them to git.
  * * ./sync2git.py force-push-module N:S:V:C - Push without checking CVE.
+ * * ./sync2git.py force-push-package N-V-R - Push without checking CVE.
  * * ./sync2git.py push - Push packages/modules to git (depending on options).
+ * * fgrep 'Filtered Mod' logs/sync2git-$(date --iso=date)
+ * * fgrep 'Filtered Pkg' logs/sync2git-$(date --iso=date)
  * ./sync2build.py - Take packages from git and sync them to koji builds.
  * * ./sync2build.py packages
  * * ./sync2build.py modules
