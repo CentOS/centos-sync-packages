@@ -804,7 +804,7 @@ def main():
         bpkgs = []
         for arg in args[1:]:
             try:
-                bpkg = nvr2pkg(arg)
+                bpkg = spkg.nvr2pkg(arg)
             except:
                 print(" ** Package format is traditional (N-V-R)")
                 sys.exit(1)
