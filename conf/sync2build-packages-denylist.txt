@@ -49,11 +49,11 @@ rhel-system-roles-sap
 sap-cluster-connector
 
 # Newer do not ship ...
-# 2020-04-30, rhbz#1827087
-filesystem
 # 2020-11-18, rhbz#1891906
 freetype
 # 2020-09-28, rhbz#1588626
 liblouis
 # 2020-10-29, rhbz#1846152
 mingw-openssl
+# rhbz#1840793
+librevenge    # rhbz#1840793
