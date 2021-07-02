@@ -50,10 +50,10 @@ sap-cluster-connector
 
 # Newer do not ship ...
 # 2020-11-18, rhbz#1891906
-freetype
+nvr=freetype-2.9.1-5.el8
 # 2020-09-28, rhbz#1588626
-liblouis
+nvr=liblouis-2.6.2-22.el8
 # 2020-10-29, rhbz#1846152
-mingw-openssl
+nvr=mingw-openssl-1.0.2k-3.el8
 # rhbz#1840793
-librevenge    # rhbz#1840793
+nvr=librevenge-0.0.4-13.el8
