@@ -74,19 +74,19 @@ arguments/configuration/options we use:
 
  * Developer/packager creates new code for el8.
  * That code gets push to an internal compose.
- * sync2git
+ * **sync2git**
  * * Looks at the compose, for packages and modules.
  * * Packages:
  * * * Filters out any package names in `conf/sync2git-packages-denylist.txt`
  * * * Compares the packages versions vs. what is in git, removing packages already there (kind of assumes we don't go backwards).
  * * * Filters out any package NVRs that are denied by the CVE checker.
- * * * alt-src the packages
+ * * * **alt-src** the packages
  * * Modules:
  * * * Filters out any modules which contain a package NVR that is denied by the CVE checker.
  * * * Compares the module versions vs. what is in git, removing modules already there (kind of assumes we don't go backwards).
- * * * alt-src the module
- * * * alt-src the packages
- * sync2build
+ * * * **alt-src** the module
+ * * * **alt-src** the packages within the module.
+ * **sync2build**
  * * Looks at the koji tag `dist-c8-strea`, for packages.
  * * * Filters out any names/nvrs in `conf/sync2build-packages-denylist.txt`. Note that only a single package is in the koji tag, so removing that NVR will remove that package.
  * * For each of the remaining packages we then:
@@ -100,4 +100,4 @@ arguments/configuration/options we use:
  * * * * If it is a rebuild release we skip it.
  * * * * If it matches `conf/sync2build-gittags-denylist.txt` we skip it.
  * * * * If it is older than the latest build, we skip it.
- * * * * For any NVRs that are left, we build it.
+ * * * * For any NVRs that are left, we ask **koji to build it**.
