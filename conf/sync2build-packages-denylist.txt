@@ -25,6 +25,15 @@ shim
 shim-unsigned-aarch64
 shim-unsigned-x64
 
+# Picky ordering
+vulkan-headers
+spirv-headers
+spirv-tools
+vulkan-loader
+glslang
+vulkan-tools
+vulkan-validation-layers
+
 # ExclusiveArch s390x
 s390utils
 libica
